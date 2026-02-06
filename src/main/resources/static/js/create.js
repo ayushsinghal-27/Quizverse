@@ -1,35 +1,29 @@
 function createQuiz() {
-    const categoryInput = document.getElementById("category");
-    const numQInput = document.getElementById("numQ");
-    const titleInput = document.getElementById("title");
+    const category = document.getElementById("category").value.trim();
+    const numQ = document.getElementById("numQ").value.trim();
+    const title = document.getElementById("title").value.trim();
 
-    const category = categoryInput.value;
-    const numQ = numQInput.value;
-    const title = titleInput.value;
-
-    //  FRONTEND VALIDATION
     if (!category || !numQ || !title) {
         showPopup("Fill the fields");
         return;
     }
-
-    console.log("Creating quiz:", category, numQ, title);
 
     fetch(`/quiz/create?category=${encodeURIComponent(category)}&numQ=${numQ}&title=${encodeURIComponent(title)}`, {
         method: "POST"
     })
     .then(async res => {
         const text = await res.text();
+
         if (!res.ok) {
-            showPopup(text);
+            // 🔥 MAX QUESTION HANDLING
+            showPopup(`Only ${text} questions available in category '${category}'`);
             throw new Error(text);
         }
+
         return text;
     })
-    .then(id => {
-        window.location.href = `quiz.html?id=${id}`;
+    .then(quizId => {
+        window.location.href = `quiz.html?id=${quizId}`;
     })
-    .catch(err => {
-        console.error("Error:", err);
-    });
+    .catch(err => console.error(err));
 }

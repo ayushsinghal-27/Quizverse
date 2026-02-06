@@ -55,7 +55,7 @@ function toggleCategories() {
         return;
     }
 
-    fetch("http://localhost:8080/question/categories")
+    fetch("/question/categories")
         .then(res => res.json())
         .then(categories => {
             menu.innerHTML = "";
