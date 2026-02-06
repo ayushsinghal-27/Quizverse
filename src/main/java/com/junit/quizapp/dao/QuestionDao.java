@@ -17,14 +17,27 @@ public interface QuestionDao extends JpaRepository<Question, Integer> {
 //    @Query(value = "SELECT * FROM question q WHERE q.category=:category ORDER BY Random() LIMIT :numQ", nativeQuery = true)
 //    List<Question> findRandomQuestionsByCategory(String category, int numQ);
 
+//    @Query(
+//            value = "SELECT * FROM question WHERE category = :category ORDER BY RAND() LIMIT :numQ",
+//            nativeQuery = true
+//    )
+//    List<Question> findRandomQuestionsByCategory(
+//            @Param("category") String category,
+//            @Param("numQ") int numQ
+//    );
+
+//    @Query(
+//            value = "SELECT * FROM question WHERE category = :category ORDER BY RANDOM() LIMIT :numQ",
+//            nativeQuery = true
+//    )
+//    List<Question> findRandomQuestionsByCategory(String category, int numQ);
+
     @Query(
-            value = "SELECT * FROM question WHERE category = :category ORDER BY RAND() LIMIT :numQ",
+            value = "SELECT * FROM question WHERE LOWER(category) = LOWER(:category) ORDER BY RANDOM() LIMIT :numQ",
             nativeQuery = true
     )
-    List<Question> findRandomQuestionsByCategory(
-            @Param("category") String category,
-            @Param("numQ") int numQ
-    );
+    List<Question> findRandomQuestionsByCategory(String category, int numQ);
+
 
     @Query("SELECT DISTINCT q.category FROM Question q")
     List<String> findAllCategories();

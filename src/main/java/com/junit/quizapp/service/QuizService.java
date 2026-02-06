@@ -24,24 +24,28 @@ public class QuizService {
     @Autowired
     QuestionDao questionDao;
 
-    public ResponseEntity<?> createQuiz(String category, int numQ, String title) {
+    public ResponseEntity<Integer> createQuiz(String category, int numQ, String title) {
 
-        List<Question> questions = questionDao.findRandomQuestionsByCategory(category, numQ);
+        List<Question> questions =
+                questionDao.findRandomQuestionsByCategory(category, numQ);
+
+        if (questions.isEmpty()) {
+            return new ResponseEntity<>(0, HttpStatus.BAD_REQUEST);
+        }
 
         if (questions.size() < numQ) {
-            return ResponseEntity
-                    .badRequest()
-                    .body("Maximum " + questions.size() +
-                            " questions available in category '" + category + "'");
+            return new ResponseEntity<>(questions.size(), HttpStatus.BAD_REQUEST);
         }
 
         Quiz quiz = new Quiz();
         quiz.setTitle(title);
-
         quiz.setQuestions(questions);
-        quizDao.save(quiz);
+
+        quiz = quizDao.save(quiz); // ensure ID generated
+
         return new ResponseEntity<>(quiz.getId(), HttpStatus.CREATED);
     }
+
 
     public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(Integer id) {
         Optional<Quiz> quiz = quizDao.findById(id);
