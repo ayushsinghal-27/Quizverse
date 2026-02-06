@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QuizVerse Create</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="navbar">
+    <h1 style="cursor:pointer;" onclick="goHome()">QUIZVERSE</h1>
+
+    <nav class="nav">
+        <div class="dropdown">
+            <span onclick="toggleCategories()">Categories</span>
+            <div id="categoryDropdown" class="dropdown-menu"></div>
+        </div>
+
+        <a href="#" onclick="goHome()">Create</a>
+    </nav>
+</header>
+
+
+<div class="container">
+    <div class="card">
+        <h2>Create Quiz</h2>
+
+        <input id="category" placeholder="Category (java, sql)">
+        <input id="numQ" type="number" placeholder="Number of Questions">
+        <input id="title" placeholder="Quiz Title">
+
+        <button class="primary" onclick="createQuiz()">Create Quiz</button>
+    </div>
+</div>
+
+<script src="js/create.js"></script>
+<script>
+    function goHome() {
+        window.location.href = "index.html";
+    }
+</script>
+<script>
+function goHome() {
+    window.location.href = "index.html";
+}
+
+function toggleCategories() {
+    const menu = document.getElementById("categoryDropdown");
+
+    if (menu.style.display === "block") {
+        menu.style.display = "none";
+        return;
+    }
+
+    fetch("http://localhost:8080/question/categories")
+        .then(res => res.json())
+        .then(categories => {
+            menu.innerHTML = "";
+
+            categories.forEach(cat => {
+                const item = document.createElement("div");
+                item.innerText = cat;
+                item.onclick = () => {
+                    document.getElementById("category").value = cat;
+                    menu.style.display = "none";
+                };
+                menu.appendChild(item);
+            });
+
+            menu.style.display = "block";
+        });
+}
+</script>
+<script>
+function showPopup(message) {
+    document.getElementById("popupMessage").innerText = message;
+    document.getElementById("popupOverlay").style.display = "flex";
+}
+
+function closePopup() {
+    document.getElementById("popupOverlay").style.display = "none";
+}
+</script>
+
+<div id="popupOverlay" class="popup-overlay">
+    <div class="popup">
+        <p id="popupMessage"></p>
+        <button onclick="closePopup()">OK</button>
+    </div>
+</div>
+
+</body>
+</html>

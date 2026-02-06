@@ -1,0 +1,226 @@
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #e9f1f7, #f7fbff);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    width: 100%;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+header nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+}
+
+.container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.card {
+    background: white;
+    border-radius: 18px;
+    padding: 40px;
+    width: 520px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.question {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.option {
+    padding: 14px;
+    border-radius: 30px;
+    border: none;
+    background: #1e6fe3;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.option:hover {
+    background: #1559b8;
+}
+
+.option.selected {
+    background: #0c3c87;
+}
+
+.progress {
+    margin-top: 30px;
+}
+
+.progress-bar {
+    height: 6px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #1e6fe3;
+    transition: width 0.3s;
+}
+
+.timer {
+    margin-top: 12px;
+    font-size: 14px;
+    color: #666;
+}
+
+button.primary {
+    margin-top: 30px;
+    padding: 12px 30px;
+    border-radius: 25px;
+    border: none;
+    background: #1e6fe3;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+button.primary:hover {
+    background: #1559b8;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+.nav {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.dropdown {
+    position: relative;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    display: none;
+    min-width: 140px;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.dropdown-menu div {
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.dropdown-menu div:hover {
+    background: #f0f4ff;
+}
+/* SIMPLE, ELEGANT NAVBAR */
+.navbar {
+    width: 100%;
+    padding: 22px 60px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: #f4f8fb; /* matches page background */
+    border-bottom: 1px solid #e3ebf3;
+}
+
+.navbar h1 {
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: #0f172a;
+}
+
+.nav a,
+.dropdown span {
+    font-size: 14px;
+    color: #334155;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.nav a:hover,
+.dropdown span:hover {
+    color: #2563eb;
+}
+/* POPUP MODAL */
+.popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.popup {
+    background: white;
+    padding: 24px 32px;
+    border-radius: 12px;
+    min-width: 320px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+}
+
+.popup p {
+    margin-bottom: 20px;
+    font-size: 15px;
+    color: #334155;
+}
+
+.popup button {
+    padding: 8px 26px;
+    border-radius: 20px;
+    border: none;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+}
